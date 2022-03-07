@@ -1,29 +1,28 @@
-import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { Box as NativeBox } from '@react-three/drei'
+import React, { useRef, useState } from 'react'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { TextureLoader } from 'three'
 
-export default function Box(props) {
-  const mesh = useRef()
-
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
-
+function Box(props) {
+  // This reference gives us direct access to the THREE.Mesh object
+  const ref = useRef()
+  // Hold state for hovered and clicked events
+  const [hovered, hover] = useState(false)
+  const [clicked, click] = useState(false)
+  const [texture] = useLoader(TextureLoader, "https://assets.wallpapersin4k.org/uploads/2017/04/World-Map-Wallpaper-Black-And-White-6.jpg")
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => (ref.current.rotation.x += 0.01));
+  // Return the view, these are regular Threejs elements expressed in JSX
   return (
-    <NativeBox
-      args={[1, 1, 1]}
+    <mesh
       {...props}
-      ref={mesh}
-      scale={active ? [6, 6, 6] : [5, 5, 5]}
-      onClick={() => setActive(!active)}
-      onPointerOver={() => setHover(true)}
-      onPointerOut={() => setHover(false)}
-    >
-      <meshStandardMaterial
-        attach="material"
-        color={hovered ? '#2b6c76' : '#720b23'}
-      />
-    </NativeBox>
+      ref={ref}
+      scale={clicked ? 1.5 : 1}
+      onClick={(event) => click(!clicked)}
+      onPointerOver={(event) => hover(true)}
+      onPointerOut={(event) => hover(false)}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    </mesh>
   )
 }
+export default Box;
