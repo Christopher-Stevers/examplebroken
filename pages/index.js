@@ -10,11 +10,12 @@ export default function IndexPage() {
     if(target.current){
       
 			const scene = new THREE.Scene();
+      scene.background= new THREE.Color({color: 0x0000ff});
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
       const texture = new THREE.TextureLoader().load( 'World_map_green.jpg');
       const material = new THREE.MeshBasicMaterial( { map: texture } );
 			const renderer = new THREE.WebGLRenderer();
-     const effect = new AsciiEffect( renderer, '      $$$$$$$', { color: true, } );
+     const effect = new AsciiEffect( renderer, ' $$$$$', { color: true, } );
       effect.setSize( window.innerWidth, window.innerHeight );
       effect.domElement.style.color = 'white';
       effect.domElement.style.backgroundColor = 'black';
