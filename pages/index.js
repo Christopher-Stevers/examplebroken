@@ -37,6 +37,7 @@ controls.update()
 controls.update()
 
 				effect.render( scene, camera );
+        sphere.rotation.y+=0.01
 			};
 
 			animate();
