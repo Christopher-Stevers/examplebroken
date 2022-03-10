@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link'
-import { useEffect, useRef } from "react"
+import { useEffect, useState, useRef } from "react"
 import * as THREE from 'three'
 import { OrbitControls } from '../components/OrbitControls';
 import { AsciiEffect } from '../components/AsciiEffect';
 export default function IndexPage() {
   const target = useRef();
+  const [spin, updateSpin] = useState(false);
   useEffect(()=>{
     if(target.current){
       
@@ -37,13 +38,14 @@ controls.update()
 controls.update()
 
 				effect.render( scene, camera );
-        sphere.rotation.y+=0.01
+       if (spin) sphere.rotation.y+=0.01
 			};
 
 			animate();
     }
-  },[target])
-  return (
-      <div ref={target}></div>
+  },[target, spin])
+  return (<div style={{position: "relative"}}>
+      <div style={{position: "absolute", top:"0px", left:"0px", zIndex:9}} ref={target}></div>
+      <button style={{borderRadius:0 ,position: "absolute", top:"0px", left:"0px", zIndex:10, }} onClick={()=>updateSpin(()=>!spin)}>{spin? "stop": "spin"}</button></div>
   )
 }
