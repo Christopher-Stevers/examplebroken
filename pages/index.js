@@ -35,7 +35,6 @@ export default function IndexPage() {
 			const sphere = new THREE.Mesh( geometry, material );
 			scene.add( sphere );
 			camera.position.z = 5;
-controls.update()
 			function animate(spin) {
 				requestAnimationFrame( animate );
 controls.update()
