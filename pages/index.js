@@ -12,10 +12,14 @@ export default function IndexPage() {
 			const scene = new THREE.Scene();
       scene.background= new THREE.Color({color: 0x0000ff});
 			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-      const texture = new THREE.TextureLoader().load( 'map2.jpg');
+      const texture = new THREE.TextureLoader().load( 'map1.png');
       const material = new THREE.MeshBasicMaterial( { map: texture } );
 			const renderer = new THREE.WebGLRenderer();
-     const effect = new AsciiEffect( renderer, ' $$$$$$$$$$$$$$', { color: true, } );
+      const str = "1Є₿$¥Ξ";
+     const randStr = [...`${str}`, "0x"].sort((a, b)=>{
+        return (.5- Math.random())*1
+      }).join("");
+     const effect = new AsciiEffect( renderer, ` ${randStr}`, { color: true, } );
       effect.setSize( window.innerWidth, window.innerHeight );
       effect.domElement.style.color = 'white';
       effect.domElement.style.backgroundColor = 'black';

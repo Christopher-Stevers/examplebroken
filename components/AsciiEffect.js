@@ -227,7 +227,7 @@ class AsciiEffect {
 
 					}
 
-					iCharIdx = Math.floor( ( 1 - fBrightness ) * ( aCharList.length - 1 ) );
+					iCharIdx = (1-fBrightness)?Math.floor( x+y)%8+1:0;
 
 					if ( bInvert ) {
 
