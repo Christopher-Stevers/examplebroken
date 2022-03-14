@@ -16,7 +16,7 @@ export default function IndexPage() {
       const material = new THREE.MeshBasicMaterial( { map: texture } );
 			const renderer = new THREE.WebGLRenderer();
       const str = "1Є₿$¥Ξ";
-     const randStr = [...`${str}`, "0x"].sort((a, b)=>{
+     const randStr = [...`${str}${str}${str}${str}${str}${str}`, "0x"].sort((a, b)=>{
         return (.5- Math.random())*1
       }).join("");
      const effect = new AsciiEffect( renderer, ` ${randStr}`, { color: true, } );
